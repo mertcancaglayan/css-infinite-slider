@@ -1,0 +1,155 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+}
+
+:root {
+	--scroll-duration: 30s;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #f0f0f0;
+}
+
+.container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.container.horizantal {
+	flex-direction: column;
+}
+
+.container.vertical {
+	height: 1024px;
+	justify-content: space-around;
+}
+
+.container > * {
+	border: 1px solid black;
+	max-width: 1536px;
+	position: relative;
+	overflow: hidden;
+	margin: 20px 0;
+}
+
+.toLeft,
+.toRight {
+	width: 90%;
+	height: 100px;
+	mask-image: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, 1) 20%,
+		rgba(0, 0, 0, 1) 80%,
+		rgba(0, 0, 0, 0)
+	);
+}
+
+.toLeft .item,
+.toRight .item {
+	width: 12%;
+}
+
+.toUp,
+.toDown {
+	display: flex;
+	justify-content: center;
+	width: 12%;
+	height: 100%;
+	mask-image: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, 1) 20%,
+		rgba(0, 0, 0, 1) 80%,
+		rgba(0, 0, 0, 0)
+	);
+}
+
+.toUp .item,
+.toDown .item {
+	width: 90%;
+}
+
+.item {
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+}
+
+.toLeft:hover .item,
+.toRight:hover .item,
+.toUp:hover .item,
+.toDown:hover .item {
+	animation-play-state: paused;
+}
+
+.item img {
+	height: 60%;
+	width: 90%;
+	object-fit: contain;
+}
+
+@keyframes scrollLeft {
+	from {
+		left: 100%;
+	}
+	to {
+		left: -12%;
+	}
+}
+
+@keyframes scrollRight {
+	from {
+		left: -12%;
+	}
+	to {
+		left: 100%;
+	}
+}
+
+@keyframes scrollUp {
+	from {
+		top: 100%;
+	}
+	to {
+		top: -100px;
+	}
+}
+
+@keyframes scrollDown {
+	from {
+		top: -100px;
+	}
+	to {
+		top: 100%;
+	}
+}
+
+.toLeft .item {
+	animation: scrollLeft var(--scroll-duration) linear infinite;
+}
+
+.toRight .item {
+	animation: scrollRight var(--scroll-duration) linear infinite;
+}
+
+.toUp .item {
+	animation: scrollUp var(--scroll-duration) linear infinite;
+}
+
+.toDown .item {
+	animation: scrollDown var(--scroll-duration) linear infinite;
+}
